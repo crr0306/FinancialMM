@@ -1,0 +1,100 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>fmmActiveX</title>
+</head>
+<body>
+	<object id="record" classid="clsid:F4B89D89-EAF4-411E-AFBE-76C1765453C3">
+		<param name="_ExtentX" value="20000"/>
+		<param name="_ExtentY" value="10000"/>
+	</object>
+
+<br>
+
+串口号:
+<select name="comm" id="fmm">
+
+<option value="COM1">COM1</option>
+
+<option value="COM2">COM2</option>
+
+<option value="COM3">COM3</option>
+
+<option value="COM4">COM4</option>
+
+<option value="COM5">COM5</option>
+
+<option value="COM6">COM6</option>
+
+<option value="COM7">COM7</option>
+
+<option value="COM8">COM8</option>
+
+<option value="COM9">COM9</option>
+
+<option value="COM10">COM10</option>
+
+</select>
+
+<br>
+  <input type="button" OnClick="shuaka()"  value=" 读取卡号"></input>
+<br>
+	<input type="button" OnClick="pinpad()"  value="打开加密键盘"></input>
+<br>
+	<input type="button" OnClick="closeport()"  value="关闭串口"></input>
+
+
+<SCRIPT LANGUAGE="JavaScript"> 
+
+
+
+function shuaka()  
+
+{  
+	//alert(document.getElementById("fmm").value);
+	record.SerialPort(document.getElementById("fmm").value);
+       
+	
+}
+function pinpad()  
+{  
+	
+	record.Pidpad(document.getElementById("fmm").value);
+       	
+}
+function closeport()  
+{  
+	record.ClosePort();
+	
+}
+
+function ReadKh(kh){
+		//alert("333");
+		//alert("事件参数-卡号："+kh);
+		document.getElementById("kh").value = kh;
+
+}
+function ReceivePad(cspassword){
+	//	alert("444");
+		//alert("事件参数-密码："+cspassword);
+		document.getElementById("cspassword").value = cspassword;
+}
+function Init(){
+	
+	record.attachEvent('ReadKh',ReadKh);
+	record.attachEvent('ReceivePad', ReceivePad);			
+}
+
+//初始化
+Init()
+</SCRIPT>
+
+<form>
+ 卡号: <input type="text" name="kh" id="kh" size=100></input>
+ <br>
+ 密码：<input type="text" name="cspassword" id="cspassword"size=50</input>
+</form>
+</body>
+</html> 
+
+

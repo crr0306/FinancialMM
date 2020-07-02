@@ -1,0 +1,59 @@
+// FinancialMM.idl : type library source for ActiveX Control project.
+
+// This file will be processed by the MIDL compiler tool to
+// produce the type library (FinancialMM.tlb) that will become a resource in
+// FinancialMM.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(899CCE5E-66D1-4B75-8BED-BC00FCCE8EAE), version(1.0),
+  control ]
+library FinancialMMLib
+{
+	importlib(STDOLE_TLB);
+
+	//  Primary dispatch interface for CFinancialMMCtrl
+	[ 
+		uuid(A8A2175D-85E3-405E-9C65-C65066ECFB27)	
+	]
+	dispinterface _DFinancialMM
+	{
+		properties:
+		methods:
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+			[id(1)] LONG OpenPort(BSTR portname);
+			[id(2)] void ClosePort();
+			[id(3)] void Pidpad(BSTR portname);
+			[id(4)] void SerialPort(BSTR portname);
+
+	};
+
+	//  Event dispatch interface for CFinancialMMCtrl
+
+	[ 
+		uuid(8448F1E8-BBA7-420B-A41A-374640CE6B9A)	
+	]
+	dispinterface _DFinancialMMEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			
+			[id(1)] void ReadKh(BSTR kh);
+			[id(2)] void ReceivePad(BSTR password);
+	};
+
+	//  Class information for CFinancialMMCtrl
+	[
+		uuid(F4B89D89-EAF4-411E-AFBE-76C1765453C3)
+	]
+	coclass FinancialMM
+	{
+		[default] dispinterface _DFinancialMM;
+		[default, source] dispinterface _DFinancialMMEvents;
+	};
+
+};
